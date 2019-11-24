@@ -1,0 +1,25 @@
+{% extends 'movies/base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Movie List
+{% endblock title %}
+
+{% block body %}
+<h1>영화 목록</h1>
+    <a href="{% url 'accounts:user_list' %}">
+        <button>유저 목록으로
+        </button>
+    </a>
+    <br>
+<br>
+    {% if movies %}
+        {% for movie in movies %}
+            <div style="display:inline-block">
+                <a href="{% url 'movies:movie_detail' movie.id %}">
+                    <img src="{{ movie.poster_url }}" alt="movie_poster" style='width: 300px'>
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock body %}
