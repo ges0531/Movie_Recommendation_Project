@@ -35,7 +35,7 @@ class ReviewModelForm(forms.ModelForm):
         fields = ('content', 'rate', )
 
 class DateModelForm(forms.ModelForm):
-    release_date = forms.DateField()
+    release_date = forms.DateTimeField()
 
     class Meta:
         model = Date
