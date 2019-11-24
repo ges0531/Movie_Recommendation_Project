@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% comment %} static 이라고 쓰면 assets 까지 들어가는거라 안써줘도됨 {% endcomment %}
+    <title>Fake Insta</title>
+    <script src="https://kit.fontawesome.com/af3741f1fe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% include '_navbar.html' %}
+    <div class="container">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+    <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/like.js' %}"></script>
+</body>
+</html>
