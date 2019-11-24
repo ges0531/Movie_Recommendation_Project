@@ -1,0 +1,20 @@
+<form action="{% url 'movies:create_review' movie.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+
+{% if reviews %}
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <b>{{ user.username }}</b>:
+                평점: {{ review.score }} 한줄평: {{ review.content }}
+                <form method="POST" action="{% url 'movies:delete_review' movie.id review.id %}" style="display: inline-block">
+                    {% csrf_token %}
+                    <input type="submit", value="[삭제]">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
