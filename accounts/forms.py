@@ -1,17 +1,12 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
-class CustomUserCreationForm(UserCreationForm):  # 정보 저장
-
-    class Meta:
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm):
         model = User
-        fields = ('username', 'email', )
+        fields = ('username', 'email', 'first_name', 'last_name', )
 
-
-
-class CustomAuthenticationForm(AuthenticationForm):  # 정보 인증 (예외케이스로 생각)
+class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User

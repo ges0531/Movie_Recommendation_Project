@@ -1,4 +1,4 @@
-from .models import Movie, Genre, Review
+from .models import Movie, Genre, Review, Date
 from django import forms
 
 class MovieModelForm(forms.ModelForm):

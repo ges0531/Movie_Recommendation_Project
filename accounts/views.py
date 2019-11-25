@@ -1,29 +1,28 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_GET, require_POST, require_http_methods
-# from .models import User 이걸 안전하게 꺼내 쓰려면
-from django.contrib.auth import login as auth_login, logout as auth_logout
 
-# 회원가입용 Form, 인증(로그인)용 Form,
+# Create your views here.
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+# from .models import User
+from django.views.decorators.http import require_http_methods, require_POST
+# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
-
-# 현재 Project에서 사용할 Uset 모델을 return 하는 함수
+from movies.models import Review
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
-
-
 
 @require_http_methods(['GET', 'POST'])
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('/')
-
-    if request.method == 'POST':
+        return redirect('accounts:user_list')
+    if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
-            return redirect('/')
+            response = redirect('accounts:user_list')
+            return response
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/signup.html', {
@@ -34,31 +33,39 @@ def signup(request):
 @require_http_methods(['GET', 'POST'])
 def login(request):
     if request.user.is_authenticated:
-        return redirect('/')
-    if request.method == 'POST':
+        return redirect('accounts:user_list')
+    
+    if request.method == "POST":
         form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('/')
+            return redirect('accounts:user_list')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'accounts/login.html', {
-        'form': form
+        'form': form,
     })
 
+@login_required
 def logout(request):
     auth_logout(request)
-    return redirect('/')
+    return redirect('accounts:user_list')
 
 
-@require_GET
-def user_page(request, user_id):
-    # 특정 사람의 개인 페이지를 들어가고 싶은거
-    user = get_object_or_404(User, id=user_id)
-    return render(request, 'accounts/user_page.html', {
-        'user_info': user,
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'accounts/list.html', {
+        'users': users,
     })
 
+
+def user_detail(request, user_id):
+    user_info = get_object_or_404(User, id=user_id)
+    reviews = Review.objects.filter(user=user_info)
+    return render(request, 'accounts/detail.html', {
+        'user_info': user_info,
+        'reviews': reviews,
+    })
 
 def follow(request, user_id):
     fan = request.user
