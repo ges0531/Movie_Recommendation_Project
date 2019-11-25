@@ -1,4 +1,4 @@
-from .models import Movie, Genre, Review, Date
+from .models import Movie, Genre, Review
 from django import forms
 
 class MovieModelForm(forms.ModelForm):
@@ -33,10 +33,3 @@ class ReviewModelForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('content', 'rate', )
-
-class DateModelForm(forms.ModelForm):
-    release_date = forms.DateTimeField()
-
-    class Meta:
-        model = Date
-        fields = ('release_date', )
