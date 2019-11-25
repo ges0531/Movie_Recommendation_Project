@@ -13,13 +13,51 @@
     </a>
     <br>
 <br>
-    {% if movies %}
+
+<div v-bind:movies>
+    <div v-if="flag === true">
+        <!-- 처음 화면. mv 5개 나올때. 5개짜리 movie 를 render(basicRendering) -->
+        <button @click="getYearsMovies" id="js-years-button">2018</button>
+            <li v-for="movie in years_of_movies">
+                [[ movie ]]
+            </li>
+    </div>
+
+    <div v-else>
+        <button id="js-years-button">2018</button>
+
+    </div>
+</div>
+    <!-- {% if movies %}
         {% for movie in movies %}
             <div style="display:inline-block">
                 <a href="{% url 'movies:movie_detail' movie.id %}">
                     <img src="{{ movie.poster_url }}" alt="movie_poster" style='width: 300px'>
+                    <button @click="getYearsMovies">Click</button>
+
                 </a>
             </div>
         {% endfor %}
-    {% endif %}
+    {% endif %} -->
 {% endblock body %}
+
+<script>
+    const app = new Vue(
+        {
+            el: '#app',
+            delimiters: ['[[', ']]'],
+            data () {
+                return {
+                    flag = true
+                }
+            },
+            computed: {
+
+                getYearsMovies(movie_of_years) {
+                    this.movies = movie_of_years
+                },
+            }
+        }
+    )
+</script>
+<script src="{% static 'movie_list.js'%}"></script>
