@@ -4,11 +4,11 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
+    path('', views.user_list, name='user_list'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-
-    path('user_page/<int:user_id>/', views.user_page, name='user_page'),
+    path('<int:user_id>/', views.user_detail, name='user_detail'),
     path('follow/<int:user_id>/', views.follow, name='follow'),
 
 ]

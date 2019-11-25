@@ -1,12 +1,9 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
+{% extends 'accounts/base.html' %}
+{% block title %}Signup{% endblock title %}
 
 {% block body %}
-<form method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-    <button class="btn btn-primary">Submit</button>
-    {% endbuttons %}
-</form>
+<br>
+<h1>회원 가입</h1>
+<br>
+   {% include 'accounts/_form.html' %}
 {% endblock body %}
