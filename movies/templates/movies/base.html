@@ -9,10 +9,15 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    {% block body %}
-    {% endblock body %}
-    
-    {% block script %}
-    {% endblock  %}
+
+    <div id="app">
+        {% block body %}
+        {% endblock body %}
+    </div>    
+    {% comment %} Bootstrap jquery, popper, bootstrap {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
 </body>
 </html>
