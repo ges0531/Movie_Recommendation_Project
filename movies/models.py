@@ -1,10 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+import json
 User = get_user_model()
 
 class Genre(models.Model):
-    # genre_id = models.IntegerField(null=True)
     name = models.CharField(max_length=100, blank=True)
 
 
@@ -20,9 +20,19 @@ class Movie(models.Model):
         return reverse("movies:movie_detail", kwargs={"movie_id": self.pk})
 
     # @classmethod
-    # def import_data(cls):
-    #     with open('./movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
-    #         movies = json.load(f)
+    def import_data(cls):
+        with open('./movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
+            movies = json.load(f)
+            conn = http.client.HTTPSConnection("api.themoviedb.org") 
+            payload = "{}"
+            date_api = "/3/discover/movie?primary_release_year=2018&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ko-KR&api_key=c7071549de08bd22fd6ecb4d67cf2099"
+            conn.request("GET", date_api, payload)
+            res = conn.getresponse()
+            data = res.read()
+            movie_data = json.loads(data.decode("utf-8"))
+            result = movie_data['results']
+            for i in range(5):
+                movies[i]['fields']['genre']=result[i]['genre_ids']
     #         for movie in movies:
     #             genres_in_movie = movie['fields']
     #             m = cls.objects.create(                    
@@ -34,7 +44,7 @@ class Movie(models.Model):
     #                 genre = movie['genre_ids']
     #                 # genres = ','.join(gl)
     #                 # watch_grade = movie['audits'],
-    #             )
+                # )
     #             for genre_1 in genres_in_movie:
     #                 g = Genre.objects.get(gnere_id=genre_1)
     #                 m.genre_1.add(g)
