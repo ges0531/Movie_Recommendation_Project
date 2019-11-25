@@ -2,10 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewModelForm, GenreModelForm, MovieModelForm
 from .models import Review, Genre, Movie
+from django.core import serializers
+from django.core.paginator import Paginator
 # Create your views here.
 
 def movie_list(request):
     movies = Movie.objects.all()
+    # paginator = Paginator(Movie.objects.all(), 2)
+    # movies = paginator.get_page(request.GET.get('page') or 1)
+    
+    movies = serializers.serialize('json', movies, fields=('title', ))
+    print(type(movies))
     return render(request, 'movies/movie_list.html', {
         'movies': movies,
     })

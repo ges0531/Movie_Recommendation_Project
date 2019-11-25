@@ -13,21 +13,29 @@
     </a>
     <br>
 <br>
+<div id="app">
+    <ul>
+        <li v-for="movie in movies" :key="movie.pk">
+            [[ movie.fields.title ]]
+        </li>
+    </ul>
 
-<!-- <div v-bind:movies>
-    <div v-if="flag === true">
-        <button @click="getYearsMovies" id="js-years-button">2018</button>
+</div>
+
+<div>
+    <div v-if="flag">
+        <!-- <button  @click="getYearsMovies(movies)" id="js-years-button-off">1990</button>
             <li v-for="movie in years_of_movies">
                 [[ movie ]]
-            </li>
+            </li> -->
     </div>
 
     <div v-else>
-        <button id="js-years-button">2018</button>
+        <button id="js-years-button-on">2018</button>
 
     </div>
-</div> -->
-    {% if movies %}
+</div>
+    {% comment %} {% if movies %}
         {% for movie in movies %}
             <div style="display:inline-block">
                 <a href="{% url 'movies:movie_detail' movie.id %}">
@@ -36,25 +44,29 @@
                 </a>
             </div>
         {% endfor %}
-    {% endif %}
+    {% endif %} {% endcomment %}
 {% endblock body %}
 
-<!-- <script>
+{% block vue_script %}
+<script>
     const app = new Vue(
         {
             el: '#app',
             delimiters: ['[[', ']]'],
             data () {
                 return {
-                    flag = true
-                }
+                    flag: true,
+                    movies: JSON.parse(`{{ movies|safe }}`),                }
             },
             computed: {
-
                 getYearsMovies(movie_of_years) {
-                    this.movies = movie_of_years
+                    const movies_arr = []
+                    this.movies_arr = movie_of_years
+                    flag = false
+                    return this.movies_arr
                 },
             }
         }
     )
-</script> -->
+</script>
+{% endblock %}
