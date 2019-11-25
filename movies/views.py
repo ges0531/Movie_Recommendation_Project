@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ReviewModelForm, GenreModelForm, MovieModelForm, DateModelForm
-from .models import Review, Genre, Movie, Date
+from .forms import ReviewModelForm, GenreModelForm, MovieModelForm
+from .models import Review, Genre, Movie
 # Create your views here.
 
 def movie_list(request):

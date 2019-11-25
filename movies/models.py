@@ -4,20 +4,17 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Genre(models.Model):
-    name = models.CharField(max_length=100)
-
-class Date(models.Model):
-    release_date = models.DateTimeField()
+    genre_id = models.IntegerField(null=True)
+    name = models.CharField(max_length=100, blank=True)
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     overview = models.TextField()
-    popularity = models.IntegerField()
+    popularity = models.FloatField(null=True)
     poster_url = models.CharField(max_length=100)
-    runtime = models.TextField()
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    date = models.ForeignKey(Date, on_delete=models.CASCADE)
+    release_date = models.CharField(max_length=100)
+    genre = models.ManyToManyField(Genre, related_name='movie_genre')
     like_users = models.ManyToManyField(User, related_name='like_movies')
     def get_absolute_url(self):
         return reverse("movies:movie_detail", kwargs={"movie_id": self.pk})

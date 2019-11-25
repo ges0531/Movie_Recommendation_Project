@@ -9,7 +9,7 @@
         {% for review in reviews %}
             <li>
                 <b>{{ user.username }}</b>:
-                평점: {{ review.score }} 한줄평: {{ review.content }}
+                평점: {{ review.rate }} 한줄평: {{ review.content }}
                 <form method="POST" action="{% url 'movies:delete_review' movie.id review.id %}" style="display: inline-block">
                     {% csrf_token %}
                     <input type="submit", value="[삭제]">
