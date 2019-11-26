@@ -2,6 +2,7 @@
 
 
 {% block body %}
+<div id="app">
 <h1>영화 상세보기</h1>
 
 <h1>영화명: {{ movie.title }}
@@ -32,7 +33,17 @@
         <input type="submit" value="영화 목록">
     </form>
 </div>
-
-
 {% include 'movies/_review.html' %}
+</div>
 {% endblock body %}
+
+{% block vue_script %}
+<script>
+    const app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data() {
+        }
+    })
+</script>
+{% endblock %}
