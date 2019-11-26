@@ -20,6 +20,7 @@ class Movie(models.Model):
         return reverse("movies:movie_detail", kwargs={"movie_id": self.pk})
 
     # @classmethod
+<<<<<<< HEAD
     # def import_data(cls):
     #     with open('./movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
     #         movies = json.load(f)
@@ -35,6 +36,21 @@ class Movie(models.Model):
     #             result += movie_data['results'][:10]
     #         for i in range(len(movies)):
     #             movies[i]['fields']['genre']=result[i]['genre_ids']
+=======
+    def import_data(cls):
+        with open('./movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
+            movies = json.load(f)
+            conn = http.client.HTTPSConnection("api.themoviedb.org") 
+            payload = "{}"
+            date_api = "/3/discover/movie?primary_release_year=2018&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ko-KR&api_key=c7071549de08bd22fd6ecb4d67cf2099"
+            conn.request("GET", date_api, payload)
+            res = conn.getresponse()
+            data = res.read()
+            movie_data = json.loads(data.decode("utf-8"))
+            result = movie_data['results']
+            for i in range(5):
+                movies[i]['fields']['genre']=result[i]['genre_ids']
+>>>>>>> 1d468774282bf5035b94a84c4e283943bffc6bc0
     #         for movie in movies:
     #             genres_in_movie = movie['fields']
     #             m = cls.objects.create(                    
@@ -48,7 +64,7 @@ class Movie(models.Model):
     #                 f.write(json.dump(movies))
     #                 # genres = ','.join(gl)
     #                 # watch_grade = movie['audits'],
-    #             )
+                # )
     #             for genre_1 in genres_in_movie:
     #                 g = Genre.objects.get(gnere_id=genre_1)
     #                 m.genre_1.add(g)
