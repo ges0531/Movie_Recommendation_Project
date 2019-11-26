@@ -1,37 +1,37 @@
-{% extends './base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 
+{% block movie_body %}
 <div id="app">
-<h1>영화 목록</h1>
-<a href="{% url 'accounts:user_list' %}">
-    <button>유저 목록으로
-    </button>
-</a>
-<br>
-<br>
-<div id="app">
-    <div>
-        <button @click="showAll">다보기</button>
-        <div v-if="!all">
-            <div v-for="movie in get10Movies">
-                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+    <h1>영화 목록</h1>
+    <a href="{% url 'accounts:user_list' %}">
+        <button>유저 목록으로
+        </button>
+    </a>
+    <br>
+    <br>
+        <div>
+            <button @click="showAll">다보기</button>
+            <div v-if="!all">
+                <div v-for="movie in get10Movies">
+                    <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                </div>
             </div>
-        </div>
-        <div v-else>
-            <select v-model="era">
-                <option value="">All</option>
-                <option value="198">1980's</option>
-                <option value="199">1990's</option>
-                <option value="200">2000's</option>
-                <option value="201">2010's</option>
-            </select>
-            <div v-for="movie in getMoviesByYear(era)">
-                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+            <div v-else>
+                <select v-model="era">
+                    <option value="">All</option>
+                    <option value="198">1980's</option>
+                    <option value="199">1990's</option>
+                    <option value="200">2000's</option>
+                    <option value="201">2010's</option>
+                </select>
+                <div v-for="movie in getMoviesByYear(era)">
+                    <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
+{% endblock %}
     {% block vue_script %}
     <script>
         const app = new Vue({

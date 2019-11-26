@@ -11,9 +11,12 @@
 </head>
 <body>
     {% include '_navbar.html' %}
+    <div id="app">
+        {% block movie_body %}
+        {% endblock %}
+    </div>
     <div class="container">
         {% block body %}
-        
         {% endblock body %}    
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
