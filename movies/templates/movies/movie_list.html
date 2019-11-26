@@ -3,67 +3,77 @@
 
 {% block movie_body %}
 <div id="app">
-    <h1>영화 목록</h1>
-    <a href="{% url 'accounts:user_list' %}">
-        <button>유저 목록으로
-        </button>
-    </a>
     <br>
-    <br>
-        <div>
-            <button @click="showAll">다보기</button>
-            <div v-if="!all">
-                <div v-for="movie in get10Movies">
-                    <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
-                </div>
-            </div>
-            <div v-else>
-                <select v-model="era">
-                    <option value="">All</option>
-                    <option value="198">1980's</option>
-                    <option value="199">1990's</option>
-                    <option value="200">2000's</option>
-                    <option value="201">2010's</option>
-                </select>
-                <div v-for="movie in getMoviesByYear(era)">
-                    <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
-                </div>
+    <div>
+        <button @click="showAll">다보기</button>
+        <div v-if="!all">
+            <select v-model="era">
+                <option value="">All</option>
+                <option value="198">1980's</option>
+                <option value="199">1990's</option>
+                <option value="200">2000's</option>
+                <option value="201">2010's</option>
+            </select>
+            <div v-for="movie in get1980Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
+            <div v-for="movie in get1990Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
+            <div v-for="movie in get2000Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
+            <div v-for="movie in get2010Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
+        </div>
+        <div v-else>
+            <select v-model="era">
+                <option value="">All</option>
+                <option value="198">1980's</option>
+                <option value="199">1990's</option>
+                <option value="200">2000's</option>
+                <option value="201">2010's</option>
+            </select>
+            <div v-for="movie in getMoviesByYear(era)">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
-    {% block vue_script %}
-    <script>
-        const app = new Vue({
-            el: '#app',
-            delimiters: ['[[', ']]'],
-            data() {
-                return {
-                    all: false,
-                    era: '',
-                    movies: JSON.parse(`{{ movies|safe }}`),
-                    genres: JSON.parse(`{{ genres|safe }}`),
-                }
-            },
-            methods: {
-                showAll() {
-                    this.all = true;
-                }
-            },
-            computed: {
-                getMoviesByYear() {
-                    return (year) => {
-                        return this.movies.filter(movie => {
-                            const pattern = new RegExp('^' + year)
-                            return pattern.test(movie.fields.release_date)
-                        })
-                    }
-                },
-                get10Movies() {
-                    return this.movies.filter((movie, idx) => idx < 10)
-                }
-
+{% block vue_script %}
+<script>
+    const app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                all: false,
+                era: '',
+                movies: JSON.parse(`{{ movies|safe }}`),
+                genres: JSON.parse(`{{ genres|safe }}`),
             }
-        })
-    </script>
-    {% endblock %}
+        },
+        methods: {
+            showAll() {
+                this.all = true;
+            }
+        },
+        computed: {
+            getMoviesByYear() {
+                return (year) => {
+                    return this.movies.filter(movie => {
+                        const pattern = new RegExp('^' + year)
+                        return pattern.test(movie.fields.release_date)
+                    })
+                }
+            },
+            get1980Movies() {
+                return this.movies.filter((movie, idx) => idx === 0)
+            },
+            get1990Movies() {
+                return this.movies.filter((movie, idx) => idx === 143)
+            },
+            get2000Movies() {
+                return this.movies.filter((movie, idx) => idx === 210)
+            },
+            get2010Movies() {
+                return this.movies.filter((movie, idx) => idx === 380)
+            },
+        }
+    })
+</script>
+{% endblock %}
