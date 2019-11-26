@@ -8,11 +8,9 @@ from django.core.paginator import Paginator
 
 def movie_list(request):
     movies = Movie.objects.all()
-    # paginator = Paginator(Movie.objects.all(), 2)
-    # movies = paginator.get_page(request.GET.get('page') or 1)
-    
-    movies = serializers.serialize('json', movies, fields=('title', ))
-    print(type(movies))
+    paginator = Paginator(Movie.objects.all(), 20)
+    movies = paginator.get_page(request.GET.get('page') or 1)
+    movies = serializers.serialize('json', movies, fields=('title', 'poster_url', 'release_date'))
     return render(request, 'movies/movie_list.html', {
         'movies': movies,
     })
