@@ -1,0 +1,29 @@
+<nav class="mb-3 navbar sticky-top navbar-expand-lg navbar-light bg-light px-5">
+        <a class="navbar-brand" href="{% url 'movies:movie_list' %}">
+            <i class="fas fa-tape fa-2x"></i> <font size="7">|</font> <font face="궁서" size="7" color="maroon" display: inline">그때 그시절...</font>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><font face="궁서" size="5" color="maroon" display: inline">내 페이지</font></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:logout' %}" class="nav-link"><font face="궁서" size="5" color="maroon" display: inline">로그아웃</font></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:signup' %}" class="nav-link"><font face="궁서" size="5" color="maroon" display: inline">회원가입</font></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:login' %}" class="nav-link"><font face="궁서" size="5" color="maroon" display: inline">로그인</font></a>
+                    </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </nav>
