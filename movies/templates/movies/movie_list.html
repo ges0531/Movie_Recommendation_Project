@@ -14,49 +14,61 @@ Movie List
 <br>
 <br>
 <div id="app">
-    <div v-for="movie in movies" :key="movie.pk" style="display: inline">
-        <img 
-        @onclick
-        :src="[[ movie.fields.poster_url ]]" 
-        alt="movie_poster" 
-        style='width: 300px'>
+    <div>
+        <button @click="showAll">다보기</button>
+        <div v-if="!all">
+            <div v-for="movie in get10Movies">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+            </div>
+        </div>
+        <div v-else>
+            <select v-model="era">
+                <option value="">All</option>
+                <option value="198">1980's</option>
+                <option value="199">1990's</option>
+                <option value="200">2000's</option>
+                <option value="201">2010's</option>
+            </select>
+            <div v-for="movie in getMoviesByYear(era)">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+            </div>
+        </div>
     </div>
-</div>
 
-<div>
-    <div v-if="flag">
-        <!-- <button  @click="getYearsMovies" id="js-years-button-off">1990</button>
-            <li v-for="movie in years_of_movies">
-                [[ movie ]]
-            </li> -->
-    </div>
+    {% endblock body %}
 
-    <div v-else>
-        <button id="js-years-button-on">2018</button>
-
-    </div>
-</div>
-{% endblock body %}
-
-{% block vue_script %}
-<script>
-    const app = new Vue({
+    {% block vue_script %}
+    <script>
+        const app = new Vue({
             el: '#app',
             delimiters: ['[[', ']]'],
             data() {
                 return {
-                    flag: true,
+                    all: false,
+                    era: '',
                     movies: JSON.parse(`{{ movies|safe }}`),
+                    genres: JSON.parse(`{{ genres|safe }}`),
+                }
+            },
+            methods: {
+                showAll() {
+                    this.all = true;
                 }
             },
             computed: {
-                getYearsMovies(movie_of_years) {
-                    const movies_arr = []
-                    this.movies_arr = movie_of_years
-                    flag = false
-                    return this.movies_arr
+                getMoviesByYear() {
+                    return (year) => {
+                        return this.movies.filter(movie => {
+                            const pattern = new RegExp('^' + year)
+                            return pattern.test(movie.fields.release_date)
+                        })
+                    }
                 },
+                get10Movies() {
+                    return this.movies.filter((movie, idx) => idx < 10)
+                }
+
             }
         })
-</script>
-{% endblock %}
+    </script>
+    {% endblock %}

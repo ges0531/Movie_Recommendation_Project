@@ -5,14 +5,17 @@ from .models import Review, Genre, Movie
 from django.core import serializers
 from django.core.paginator import Paginator
 # Create your views here.
-
+# Movie.genre.name
 def movie_list(request):
     movies = Movie.objects.all()
-    paginator = Paginator(Movie.objects.all(), 20)
-    movies = paginator.get_page(request.GET.get('page') or 1)
-    movies = serializers.serialize('json', movies, fields=('title', 'poster_url', 'release_date'))
+    genres = Genre.objects.all()
+    # paginator = Paginator(Movie.objects.all(), 20)
+    # movies = paginator.get_page(request.GET.get('page') or 1)
+    movies = serializers.serialize('json', movies, fields=('title', 'poster_url', 'release_date','genre', ))
+    genres = serializers.serialize('json', genres, fields=('name', ))
     return render(request, 'movies/movie_list.html', {
         'movies': movies,
+        'genres': genres,
     })
 
 
