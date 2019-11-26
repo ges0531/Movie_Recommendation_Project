@@ -6,42 +6,11 @@
 <h1>유저 목록</h1>
 <br>
 {% for user in users %}
-<a href="{% url 'accounts:user_detail' user.id %}">
-    <li>
-        {{ user }}
-    </li>
-    {% endfor %}
-</a>
-
-{% if request.user.is_authenticated %}
-<br>
-<br>
-<a href="{% url 'accounts:logout' %}">
-    <button>로그아웃
-    </button>
-</a>
-
-{% else %}
-<br>
-<br>
-<a href="{% url 'accounts:login' %}">
-    <button>로그인
-    </button>
-</a>
-<br>
-<br>
-<a href="{% url 'accounts:signup' %}">
-    <button>회원가입
-    </button>
-</a>
-
-{% endif %}
-
-<br>
-<br>
-<a href="{% url 'movies:movie_list' %}">
-    <button>영화목록으로
-    </button>
-</a>
+    <a href="{% url 'accounts:user_detail' user.id %}">
+        <li>
+            {{ user }}
+        </li>
+    </a>
+{% endfor %}
 
 {% endblock body %}

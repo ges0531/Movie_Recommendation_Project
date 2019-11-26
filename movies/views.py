@@ -57,5 +57,9 @@ def movie_like(request, movie_id):
     return redirect(movie)
 
 
+def page_title(request):
+    return render(request, 'movies/page_title.html')
+
+
 # 시대와 장르를 이용한 추천 알고리즘 함수 만들기
 # 로그인 됐을때만 추천해주도록 만들기
