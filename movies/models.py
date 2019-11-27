@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 import json
 User = get_user_model()
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Genre(models.Model):
     name = models.CharField(max_length=100, blank=True)
@@ -58,6 +59,11 @@ class Movie(models.Model):
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=100)
-    rate = models.IntegerField()
+    rate = models.IntegerField(
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(1)
+        ]
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
