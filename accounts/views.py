@@ -21,7 +21,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            response = redirect('accounts:user_list')
+            response = redirect('accounts:login')
             return response
     else:
         form = CustomUserCreationForm()
@@ -51,14 +51,14 @@ def logout(request):
     auth_logout(request)
     return redirect('accounts:user_list')
 
-
+@login_required
 def user_list(request):
     users = User.objects.all()
     return render(request, 'accounts/list.html', {
         'users': users,
     })
 
-
+@login_required
 def user_detail(request, user_id):
     user_info = get_object_or_404(User, id=user_id)
     reviews = Review.objects.filter(user=user_info)
@@ -67,6 +67,7 @@ def user_detail(request, user_id):
         'reviews': reviews,
     })
 
+@login_required
 def follow(request, user_id):
     fan = request.user
     star = get_object_or_404(User, id=user_id)

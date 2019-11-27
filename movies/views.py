@@ -6,6 +6,8 @@ from django.core import serializers
 from django.core.paginator import Paginator
 # Create your views here.
 # Movie.genre.name
+
+@login_required
 def movie_list(request):
     movies = Movie.objects.all()
     genres = Genre.objects.all()
@@ -18,7 +20,7 @@ def movie_list(request):
         'genres': genres,
     })
 
-
+@login_required
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.review_set.all()
