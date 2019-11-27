@@ -2,7 +2,7 @@
 
 
 {% block body %}
-<div id="app">
+
 <h1>영화 상세보기</h1>
 
 <h1>영화명: {{ movie.title }}
@@ -37,13 +37,3 @@
 </div>
 {% endblock body %}
 
-{% block vue_script %}
-<script>
-    const app = new Vue({
-        el: '#app',
-        delimiters: ['[[', ']]'],
-        data() {
-        }
-    })
-</script>
-{% endblock %}
