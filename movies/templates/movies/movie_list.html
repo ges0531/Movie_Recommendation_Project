@@ -5,7 +5,7 @@
 <div id="app">
     <br>
     <div>
-        <input type="text" v-model="era">
+        <input type="text" v-model="era" @keydown.enter="showAll">
         <button @click="showAll">시간이동</button>
         <div v-if="!all">
             <div v-for="movie in get1980Movies">
@@ -26,9 +26,11 @@
             </div>
         </div>
         <div v-else>
-            <!-- on-click 이 일어나면 emit -->
+            
             <div v-for="movie in getMoviesByYear(era)" v-model="era">
+            <a :href="`/movies/${movie.pk}`">
                 <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+            </a>
             </div>
         </div>
     </div>
@@ -36,13 +38,9 @@
 {% endblock %}
 {% block vue_script %}
 <script>
-    import MovieDetail from './MovieDetail'
     const app = new Vue({
         el: '#app',
         delimiters: ['[[', ']]'],
-        components: {
-            MovieDetail,
-        },
         data() {
             return {
                 all: false,
