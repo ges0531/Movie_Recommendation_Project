@@ -7,51 +7,53 @@
     <br>
     <div class="center">
         <input type="text" v-model="era" @keydown.enter="showAll">
-        <button @click="showAll">시간이동</button>
+        <button  @click="showAll" class="button"><span>시간이동</span></button>
     </div>
-    <div class="center">
-        <div v-if="!all">
+    <div v-if="!all">
+        <div class="container">
             <div class="card-deck">
                 <div v-for="movie in get1980Movies">
                     <div class="card">
-                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center">1980년대</h2>
+                            <h2 class="card-title text-center"><font>1980년대</font></h2>
                         </div>
                     </div>
                 </div>
                 <div v-for="movie in get1990Movies">
                     <div class="card">
-                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center">1990년대</h2>
+                            <h2 class="card-title text-center"><font>1990년대</font></h2>
                         </div>
                     </div>
                 </div>
                 <div v-for="movie in get2000Movies">
                     <div class="card">
-                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center">2000년대</h2>
+                            <h2 class="card-title text-center"><font>2000년대</font></h2>
                         </div>
                     </div>
                 </div>
                 <div v-for="movie in get2010Movies">
                     <div class="card">
-                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center">2010년대</h2>
+                            <h2 class="card-title text-center"><font>2010년대</font></h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else>
+    </div>
+    <div v-else>
+        <div class="container">
             <div class="card-deck">
                 <div v-for="movie in getMoviesByYear(era)" v-model="era">
                     <div class="card mb-5">
                         <a :href="`/movies/${movie.pk}`">
-                            <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                            <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         </a>
                     </div>
                 </div>
