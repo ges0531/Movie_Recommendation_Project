@@ -1,5 +1,7 @@
 from .models import Movie, Genre, Review
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class MovieModelForm(forms.ModelForm):
     title = forms.CharField(max_length=100)
@@ -27,8 +29,13 @@ class GenreModelForm(forms.ModelForm):
 
 
 class ReviewModelForm(forms.ModelForm):
-    content = forms.CharField(max_length=100)
-    rate = forms.IntegerField()
+    content = forms.CharField(min_length=2, max_length=100)
+    rate = forms.IntegerField(
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(1)
+        ]
+    )
 
     class Meta:
         model = Review

@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
-
-
 {% block body %}
 
-<h1>영화 상세보기</h1>
 
-<h1>영화명: {{ movie.title }}
+<h1 style="display: inline-block">{{ movie.title }}</h1>
 <a href="{% url 'movies:movie_like' movie.id %}" style="display: inline-block">
     {% if request.user in movie.like_users.all %}
     <button>좋아요 취소</button>
@@ -13,11 +10,14 @@
     <button>좋아요</button>
     {% endif %}
 </a>
-</h1>
+
 
 <hr>
 <p>
-    장르: {{ movie.genre.name }}
+    장르: {% for genre in genres %} {{ genre.name }} {% endfor %}
+</p>
+<p>
+    인기도(하트아이콘): {{ movie.popularity }}
 </p>
 <p>
     <a href="{{ movie.poster_url }}">
@@ -27,13 +27,10 @@
 <p>
     상세설명: {{ movie.overview }}
 </p>
-
 <div>
-    <form action="{% url 'movies:movie_list' %}">
-        <input type="submit" value="영화 목록">
-    </form>
-</div>
+{% for message in messages %}
+    {{ message }}
+{% endfor %}
 {% include 'movies/_review.html' %}
-</div>
 {% endblock body %}
 

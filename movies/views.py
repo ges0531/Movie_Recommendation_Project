@@ -4,6 +4,7 @@ from .forms import ReviewModelForm, GenreModelForm, MovieModelForm
 from .models import Review, Genre, Movie
 from django.core import serializers
 from django.core.paginator import Paginator
+from django.contrib import messages
 # Create your views here.
 # Movie.genre.name
 
@@ -23,10 +24,12 @@ def movie_list(request):
 @login_required
 def movie_detail(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
+    genres = movie.genre.all()
     reviews = movie.review_set.all()
     form = ReviewModelForm()
     return render(request, 'movies/movie_detail.html', {
         'movie': movie,
+        'genres': genres,
         'reviews': reviews,
         'form': form,
     })
@@ -40,6 +43,8 @@ def create_review(request, movie_id):
         review.movie_id = movie.id
         review.user = request.user
         review.save()
+    print(form.errors)
+    messages.warning(request, form.errors)
     return redirect(movie)
 
 
@@ -63,6 +68,9 @@ def movie_like(request, movie_id):
 
 def page_title(request):
     return render(request, 'movies/page_title.html')
+
+def prac(request):
+    return render(request, 'movies/prac.html')
 
 
 # 시대와 장르를 이용한 추천 알고리즘 함수 만들기
