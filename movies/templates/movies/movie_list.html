@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block body %}
 <div id="app">
     <br>
-    <div>
+    <div class="center">
         <input type="text" v-model="era" @keydown.enter="showAll">
         <button @click="showAll">시간이동</button>
+    </div>
+    <div class="center">
         <div v-if="!all">
             <div class="card-deck">
                 <div v-for="movie in get1980Movies">
@@ -55,6 +58,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
 {% block vue_script %}

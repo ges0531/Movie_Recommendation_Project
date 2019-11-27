@@ -21,3 +21,21 @@ font {
     justify-content: center;
     align-items: center;
 }
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+
+div.card {
+    width: 300px;
+    height: 100px;
+    -webkit-transition: width 1s, height 1s, -webkit-transform 1s;
+    transition: width 1s, height 1s, transform 1s;
+  }
+  
+div.card:hover {
+width: 300px;
+height: 300px;
+transform: scale(1.2);
+}
