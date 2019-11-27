@@ -33,3 +33,5 @@ class ReviewModelForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('content', 'rate', )
+
+

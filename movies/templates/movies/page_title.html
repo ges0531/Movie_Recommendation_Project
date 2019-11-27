@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block body %}
-
+    <div id='container'>
+        <a href="{% url 'accounts:user_list' %}">안녕</a>
+    </div>
 {% endblock body %}

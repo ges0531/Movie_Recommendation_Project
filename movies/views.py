@@ -42,6 +42,8 @@ def create_review(request, movie_id):
         review.save()
     return redirect(movie)
 
+
+
 @login_required
 def delete_review(request, review_id, movie_id):
     review = get_object_or_404(Review, id=review_id, movie_id=movie_id)

@@ -1,0 +1,23 @@
+.tiledBackground {
+    background-image: url(https://image.freepik.com/free-photo/_1253-152.jpg);
+    background-size: 600px;
+    /* background-repeat: no-repeat; */
+    width: 100%;
+    height: 900px;
+  }
+
+.navbar-custom {
+    color: rgba(255, 255, 255, 0);
+    background-color: rgba(117, 57, 0, 0.397);
+}
+
+font {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+#container {
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
