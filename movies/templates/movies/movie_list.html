@@ -5,29 +5,29 @@
 <div id="app">
     <br>
     <div>
-        <button @click="showAll">다보기</button>
+        <input type="text" v-model="era">
+        <button @click="showAll">시간이동</button>
         <div v-if="!all">
-            <select v-model="era">
-                <option value="">All</option>
-                <option value="198">1980's</option>
-                <option value="199">1990's</option>
-                <option value="200">2000's</option>
-                <option value="201">2010's</option>
-            </select>
-            <div v-for="movie in get1980Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
-            <div v-for="movie in get1990Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
-            <div v-for="movie in get2000Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
-            <div v-for="movie in get2010Movies" style="display:inline"><img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'></div>
+            <div v-for="movie in get1980Movies">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                <h1>1980년대</h1>
+            </div>
+            <div v-for="movie in get1990Movies">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                <h1>1990년대</h1>
+            </div>
+            <div v-for="movie in get2000Movies">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'
+                ><h1>2000년대</h1>
+            </div>
+            <div v-for="movie in get2010Movies">
+                <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
+                <h1>2010년대</h1>
+            </div>
         </div>
         <div v-else>
-            <select v-model="era">
-                <option value="">All</option>
-                <option value="198">1980's</option>
-                <option value="199">1990's</option>
-                <option value="200">2000's</option>
-                <option value="201">2010's</option>
-            </select>
-            <div v-for="movie in getMoviesByYear(era)">
+            <!-- on-click 이 일어나면 emit -->
+            <div v-for="movie in getMoviesByYear(era)" v-model="era">
                 <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 300px'>
             </div>
         </div>
@@ -36,9 +36,13 @@
 {% endblock %}
 {% block vue_script %}
 <script>
+    import MovieDetail from './MovieDetail'
     const app = new Vue({
         el: '#app',
         delimiters: ['[[', ']]'],
+        components: {
+            MovieDetail,
+        },
         data() {
             return {
                 all: false,
