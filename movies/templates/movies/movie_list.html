@@ -6,7 +6,7 @@
 <div id="app">
     <br>
     <div class="center">
-        <input type="text" v-model="era" @keydown.enter="showAll" class="b">
+        <input type="text" v-model="era" @keydown.enter="showAll" class="b" placeholder=" 🔎 입력해주세요">
         <button  @click="showAll" class="button"><span>시간이동</span></button>
     </div>
     <div v-if="!all">

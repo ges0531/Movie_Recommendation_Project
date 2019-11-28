@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<div class="clearfix">
-    <div class="a ml-5">
+<div class="clearfix container">
+    <div class="a">
         <a href="{{ movie.poster_url }}">
             <img src="{{ movie.poster_url }}" alt="movie_img_detail" style='width: 300px'>
         </a>
     </div>
-    <div class="a">
+    <div>
         <h1 style="display: inline-block">
             <font>{{ movie.title }}</font>
         </h1>
         <a href="{% url 'movies:movie_like' movie.id %}" style="display: inline-block">
             {% if request.user in movie.like_users.all %}
-            <button>좋아요 취소</button>
+            <span style="font-size: 30px; color: red;">
+                <i class="fas fa-heart"></i>
+            </span>
+
+            {% comment %} <button>좋아요 취소</button> {% endcomment %}
             {% else %}
-            <button>좋아요</button>
+            <span style="font-size: 30px; color: gray;">
+                <i class="far fa-heart"></i>
+            </span>
+            {% comment %} <button>좋아요</button> {% endcomment %}
             {% endif %}
         </a>
         <p>
@@ -24,7 +31,7 @@
         </p>
         <p>
             <font>
-                인기도(하트아이콘): {{ movie.popularity }}
+                인기도: {{ movie.popularity }}%
             </font>
         </p>
         <p>
@@ -32,9 +39,6 @@
                 개봉일: {{ movie.release_date }}
             </font>
         </p>
-        <br>
-        <br>
-        <br>
         <p>
             <font>
                 상세설명: {{ movie.overview }}
@@ -42,11 +46,10 @@
         </p>
 
     </div>
-</div>
-<hr>
-<div>
+    <hr>
     {% for message in messages %}
     {{ message }}
     {% endfor %}
     {% include 'movies/_review.html' %}
     {% endblock body %}
+</div>

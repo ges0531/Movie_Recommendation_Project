@@ -38,13 +38,13 @@ def movie_detail(request, movie_id):
 def create_review(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     form = ReviewModelForm(request.POST)
-    if form.is_valid():
-        review = form.save(commit=False)
-        review.movie_id = movie.id
-        review.user = request.user
+    review = Review()
+    review.content = request.POST.get('input_content')
+    review.rate = request.POST.get('input_rate')
+    review.movie_id = movie.id
+    review.user = request.user
+    if review.rate and review.content:
         review.save()
-    print(form.errors)
-    messages.warning(request, form.errors)
     return redirect(movie)
 
 

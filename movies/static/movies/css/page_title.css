@@ -26,14 +26,15 @@ font {
 div.card {
     width: 250px;
     height: 250px;
+    background-color: rgba(9, 46, 71, 0.918);
     -webkit-transition: width 1s, height 1s, -webkit-transform 1s;
     transition: width 1s, height 1s, transform 1s;
   }
   
 div.card:hover {
-width: 250px;
-height: 250px;
-transform: scale(1.2);
+    width: 250px;
+    height: 250px;
+    transform: scale(1.2);
 }
 
 .button {
@@ -88,7 +89,7 @@ input.b {
 div.a {
     float: left;
     width: 40%;
-    padding: 50px;
+    padding: 20px;
   }
   
   .clearfix::after {
