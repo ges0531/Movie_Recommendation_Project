@@ -69,8 +69,8 @@ def movie_like(request, movie_id):
 def page_title(request):
     return render(request, 'movies/page_title.html')
 
-def prac(request):
-    return render(request, 'movies/prac.html')
+# def prac(request):
+#     return render(request, 'movies/prac.html')
 
 
 # 시대와 장르를 이용한 추천 알고리즘 함수 만들기
