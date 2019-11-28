@@ -52,9 +52,9 @@
     position: absolute;
     margin: false;
     top: 50%;
-    left: ;
+    /* left: ;
     right: ;
-    bottom: ;
+    bottom: ; */
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
   }
@@ -170,9 +170,9 @@
     position: absolute;
     margin: false;
     top: 10px;
-    left: ;
+    /* left: ; */
     right: 15px;
-    bottom: ;
+    /* bottom: ; */
     font-family: "Montserrat";
     font-size: 24px;
     letter-spacing: 0px;
@@ -240,7 +240,7 @@
   }
   .nav-links {
     margin: 0;
-    width: 700px;
+    width: 300px;
   }
   .search-container {
     padding-right: 15px;
@@ -248,7 +248,7 @@
   }
   .sign-div {
     margin: 0px;
-    width: 250px;
+    width: 350px;
     -webkit-transition: 0.3s cubic-bezier(0.75, 0, 0.2, 1), opacity 0.15s 0.3s cubic-bezier(0.75, 0, 0.2, 1);
     transition: 0.3s cubic-bezier(0.75, 0, 0.2, 1), opacity 0.15s 0.3s cubic-bezier(0.75, 0, 0.2, 1);
   }
@@ -468,29 +468,7 @@
     margin: 0px;
     border: 0px solid #fff;
   }
-  .button {
-    font-family: 'Montserrat';
-    font-size: 14px;
-    letter-spacing: 4px;
-    font-weight: 900;
-    line-height: 20px;
-    min-width: 200px;
-    padding: 20px 40px;
-    color: #444;
-    text-align: center;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: 1px solid #bbb;
-    margin: 0 20px;
-  }
-  .button:hover {
-    color: #2ebaae;
-    border: 1px solid #2ebaae;
-  }
-  .button.inactive {
-    color: #bbb;
-    cursor: default;
-  }
+
   .button.inactive:hover {
     color: #bbb;
     border: 1px solid #bbb;

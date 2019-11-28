@@ -1,0 +1,23 @@
+.button {
+    font-family: 'Montserrat';
+    font-size: 14px;
+    letter-spacing: 4px;
+    font-weight: 900;
+    line-height: 20px;
+    min-width: 200px;
+    padding: 20px 40px;
+    color: #444;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    margin: 0 20px;
+  }
+  .button:hover {
+    color: #2ebaae;
+    border: 1px solid #2ebaae;
+  }
+  .button.inactive {
+    color: #bbb;
+    cursor: default;
+  }
