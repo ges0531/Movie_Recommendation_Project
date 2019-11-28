@@ -1,7 +1,7 @@
 <form action="{% url 'movies:create_review' movie.id %}" method="POST">
     {% csrf_token %}
     <font>
-        한줄평: <input type="text" name="input_content" style="width:600px">
+        한줄평: <input type="text" name="input_content" style="width:600px" placeholder=" 🔎 입력해주세요">
     </font>
     <br>
     <br>
