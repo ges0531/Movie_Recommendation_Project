@@ -29,8 +29,6 @@
     {% for review in reviews %}
     <li>
         <font>{{ review.user.username }} {{ review.rate }}점
-            <br>
-            한줄평: {{ review.content }}</font>
         {% if user.id == review.user.id %}
         <form method="POST" action="{% url 'movies:delete_review' movie.id review.id %}" style="display: inline-block">
             {% csrf_token %}
@@ -41,6 +39,8 @@
             </a>
         </form>
         {% endif %}
+        <br>
+            한줄평: {{ review.content }}</font>
     </li>
     {% endfor %}
 </ul>

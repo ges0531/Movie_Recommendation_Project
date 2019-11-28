@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(9, 46, 71, 0.918);
+    /* background-color: rgba(9, 46, 71, 0.918); */
     /* background-repeat: no-repeat; */
   }
 
@@ -8,30 +8,36 @@ body {
     background-color: rgb(255, 179, 182);
 }
 
-font {
+/* font {
     font-family: 'Do Hyeon', sans-serif;
-    color: rgba(255, 255, 255, 0.925);
-}
+    color: rgba(0, 0, 0, 0.925);
+} */
 
 .account_font {
     font-family: 'Do Hyeon', sans-serif;
     color: rgba(9, 46, 71, 0.918);
 }
 
+div.container {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 123px;
+}
+
 #container {
-    height: 800px;
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .center {
-    padding: 70px 0;
+    padding: 10px;
     text-align: center;
   }
 div.card {
     width: 250px;
     height: 250px;
-    background-color: rgba(9, 46, 71, 0.918);
+    background-color: #F4F4F4;
     -webkit-transition: width 1s, height 1s, -webkit-transform 1s;
     transition: width 1s, height 1s, transform 1s;
   }
