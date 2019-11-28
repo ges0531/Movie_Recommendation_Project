@@ -129,6 +129,8 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.User'
 
 
-# Django - Heroku 설정 $ pip install django-heroku
+# Django - heroku 설정 pip install django-heroku
 import django_heroku
 django_heroku.settings(locals())
+
+# Mac => $ brew install postgresql

@@ -5,13 +5,13 @@
 {% endblock %}
 {% block body %}
 
-<div class="clearfix container">
-    <div class="a">
+<div class="row">
+    <div class="col-sm-4 center">
         <a href="{{ movie.poster_url }}">
             <img src="{{ movie.poster_url }}" alt="movie_img_detail" style='width: 300px'>
         </a>
     </div>
-    <div>
+    <div class="col-sm-8">
         <h1 style="display: inline-block">
             <font>{{ movie.title }}</font>
         </h1>
@@ -20,12 +20,10 @@
             <span style="font-size: 30px; color: red;">
                 <i class="fas fa-heart"></i>
             </span>
-            {% comment %} <button>좋아요 취소</button> {% endcomment %}
             {% else %}
             <span style="font-size: 30px; color: gray;">
                 <i class="far fa-heart"></i>
             </span>
-            {% comment %} <button>좋아요</button> {% endcomment %}
             {% endif %}
         </a>
         <p>
@@ -49,11 +47,8 @@
         </p>
 
     </div>
-    <br>
-    <hr>
-    {% for message in messages %}
-    {{ message }}
-    {% endfor %}
-    {% include 'movies/_review.html' %}
-    {% endblock body %}
 </div>
+<div class="mt-5">
+{% include 'movies/_review.html' %}
+</div>
+{% endblock body %}

@@ -2,20 +2,14 @@
 
 {% block body %}
 <div style="text-align: center">
-<h1>User List</h1>
-<br>
-
-{% for user in users %}
-<div style="text-align: center">
-    <a href="{% url 'accounts:user_detail' user.id %}">
-    
-        <li>
-            {{ user }}
-        </li>
-    </a>
+    <br>
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+            User List
+        </a>
+        {% for user in users %}
+        <a href="{% url 'accounts:user_detail' user.id %}" class="list-group-item list-group-item-action">{{ user }}</a>
+        {% endfor %}
     </div>
-{% endfor %}
-
 </div>
-
-{% endblock body %}
+{% endblock %}
