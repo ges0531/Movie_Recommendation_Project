@@ -3,6 +3,15 @@ body {
     /* background-repeat: no-repeat; */
   }
 
+.button-no-style {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 .navbar-custom {
     color: rgba(255, 106, 205, 0.925);
     background-color: rgb(255, 179, 182);
