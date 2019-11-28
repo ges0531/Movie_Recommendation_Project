@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}User_detail{% endblock title %}
+
+{% block body %}
+<div class='row my-5 mx-auto'>
+    <div class="col-5">
+        <div class="row ">
+            <h2><font>{{user_info.username}}</font></h2>
+            <!-- 팔로우 버튼, 게시물수, 팔로우 수, 자기소개 등이 들어올 공간 -->
+            {% if user != user_info %}
+            <a href="{% url 'accounts:follow' user_info.id %}" class="btn btn-light mx-3">
+                {% if user_info in user.stars.all %}<font>팔로잉</font>
+                {% else %}<font>팔로우</font>
+                {% endif %}
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-light mx-3">프로필 편집</a>
+            {% endif %}
+        </div>
+        <br>
+        <div class="row d-flex justify-content-between">
+            <h4><font>팔로워 {{user_info.fans.count}}</font></h4>
+            <h4><font>팔로우 {{user_info.stars.count}}</font></h4>
+        </div>
+
+    <hr>
+    <font>작성한 Review:
+    {% for review in reviews %}
+        {{ review.movie.title }}
+        {{ review.score }}
+    {% endfor %}</font>
+    <br>
+    <br>
+    <font>좋아하는 영화:
+    {% if user_info.like_movies.all %}
+    {% for mv in user_info.like_movies.all %}
+        <li>{{mv.title}}</font>
+        <br>
+        </li>
+    {% endfor %}
+    {% else %}
+        <font>아직 좋아하는 영화가 없습니다.</font>
+    {% endif %}
+
+
+    <br>
+    <br>
+    <a href="{% url 'accounts:user_list' %}">
+        <button>목록으로
+        </button>
+    </a>
+
+{% endblock body %}

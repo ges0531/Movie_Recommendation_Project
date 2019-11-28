@@ -1,24 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     {% comment %} Bootstrap CSS file {% endcomment %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {% comment %} FonteAwesome icon set {% endcomment %}
-    <script src="https://kit.fontawesome.com/84a0eb3116.js" crossorigin="anonymous"></script>
-    <title>{% block title %}
-    {% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'movies/css/user_page.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/css/bootstrap.min.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2fb13e06c2.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+
+    {% block head %}
+    {% endblock %}
+
 </head>
+
 <body>
-    <div class="container">
-        {% block body %}
-        {% endblock body %}
+    <!-- FONTS -->
+    <!-- Roboto, Yellowtail, and Montserrat -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:300,400|Yellowtail" rel="stylesheet">
+    <!-- PAGE STUFF -->
+    <div class="overlay">
+        <div class="abs-center overlay-card">
+            <div class="close">X</div>
+            <div class="floated overlay-image">
+                <div class="abs-center post-image"></div>
+            </div>
+            <div class="floated overlay-desc">
+                <div class="rela-block desc-title"></div>
+                <div class="rela-block desc-author"></div>
+                <div class="rela-block desc-desc"></div>
+            </div>
+        </div>
     </div>
-   {% comment %} Bootstrap JS & Jquery {% endcomment %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+    <div class="nav-bar">
+        <div class="horz-center nav-container">
+            <div class="floated logo">Eunsudalji's Movie</div>
+            <ul class="floated nav-div nav-links">
+                <li class="rela-inline">
+                <a href="{% url 'movies:movie_list' %}">Movie-List</a>
+                </li>
+                <li class="rela-inline">
+                <a href="{% url 'accounts:user_list' %}">Users</a></li>
+                <li class="rela-inline">
+                <a href="{% url 'accounts:user_detail' user.id%}">MyPage</a></li>
+                
+            </ul>
+
+            <div class="floated right nav-div search-container">
+                <div class="rela-inline icon search-icon"></div>
+                <input type="text" placeholder="Search" class="rela-inline nav-search" />
+            </div>
+            <ul class="floated right nav-div sign-div">
+                <li class="rela-inline">
+                {% if user.is_authenticated %}
+                <li class="rela-inline"><a href="{% url 'accounts:logout' %} ">Log-Out</a></li>
+                {% else %}
+                <a href="{% url 'accounts:signup' %}">Sign-Up</a></li>
+                <li class="rela-inline"><a href="{% url 'accounts:login' %}">Log-In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="rela-block container">
+    {% block body %}
+    {% endblock %}
+    </div>
+    <div class="rela-block footer">
+        <p>영지와 은수의 SSAFY PROJECT</p><br>
+        <p>Please Enjoy Our Movie Recommendation Service.<br><br>Contact: 010-9013-7346 / 010-4184-0955</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    {% block vue_script %}{% endblock %}
 </body>
+
 </html>

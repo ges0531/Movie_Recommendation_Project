@@ -20,6 +20,19 @@ class Movie(models.Model):
     def get_absolute_url(self):
         return reverse("movies:movie_detail", kwargs={"movie_id": self.pk})
 
+
+class Review(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    content = models.CharField(max_length=100)
+    rate = models.IntegerField(
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(1)
+        ]
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
     # @classmethod
     # def import_data(cls):
     #     with open('./movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
@@ -53,17 +66,4 @@ class Movie(models.Model):
     #             for genre_1 in genres_in_movie:
     #                 g = Genre.objects.get(gnere_id=genre_1)
     #                 m.genre_1.add(g)
-
-
-
-class Review(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    content = models.CharField(max_length=100)
-    rate = models.IntegerField(
-        validators=[
-            MaxValueValidator(10),
-            MinValueValidator(1)
-        ]
-    )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 

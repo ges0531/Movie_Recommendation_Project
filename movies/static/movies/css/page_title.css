@@ -13,6 +13,11 @@ font {
     color: rgba(255, 255, 255, 0.925);
 }
 
+.account_font {
+    font-family: 'Do Hyeon', sans-serif;
+    color: rgba(9, 46, 71, 0.918);
+}
+
 #container {
     height: 800px;
     display: flex;
