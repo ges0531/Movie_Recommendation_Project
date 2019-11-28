@@ -12,9 +12,11 @@
         </a>
     </div>
     <div class="col-sm-8">
-        <h1 style="display: inline-block">
-            <font>{{ movie.title }}</font>
-        </h1>
+    <br>
+        <font>
+            <h1 style="display: inline-block">{{ movie.title }}
+            </h1>
+        </font>
         <a href="{% url 'movies:movie_like' movie.id %}" style="display: inline-block">
             {% if request.user in movie.like_users.all %}
             <span style="font-size: 30px; color: red;">
@@ -49,6 +51,6 @@
     </div>
 </div>
 <div class="mt-5">
-{% include 'movies/_review.html' %}
+    {% include 'movies/_review.html' %}
 </div>
 {% endblock body %}

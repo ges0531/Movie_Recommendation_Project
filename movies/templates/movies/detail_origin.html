@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'movies/css/page_title.css' %}">
+{% endblock %}
+
+{% block body %}
+<div id="app">
+    <br>
+    <div class="center">
+        <input type="text" v-model="era" @keydown.enter="showAll" class="b" placeholder=" 🔎 가고싶은 연도(1980~2019)를 입력해 주세요.    ex) 1987">
+        <button  @click="showAll" class="button"><span>시간이동</span></button>
+    </div>
+    <div v-if="!all">
+        <div class="container">
+            <div class="card-deck">
+                <div v-for="movie in get1980Movies">
+                    <div class="card">
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
+                        <div class="card-body">
+                            <font><h2 class="card-title text-center">1980년대</h2></font>
+                        </div>
+                    </div>
+                </div>
+                <div v-for="movie in get1990Movies">
+                    <div class="card">
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
+                        <div class="card-body">
+                            <font><h2 class="card-title text-center">1990년대</h2></font>
+                        </div>
+                    </div>
+                </div>
+                <div v-for="movie in get2000Movies">
+                    <div class="card">
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
+                        <div class="card-body">
+                            <font><h2 class="card-title text-center">2000년대</h2></font>
+                        </div>
+                    </div>
+                </div>
+                <div v-for="movie in get2010Movies">
+                    <div class="card">
+                        <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
+                        <div class="card-body">
+                            <font><h2 class="card-title text-center">2010년대</h2></font>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else>
+        <div class="container">
+            <div class="card-deck">
+                <div v-for="movie in getMoviesByYear(era)" v-model="era">
+                    <div class="card mb-5">
+                        <a :href="`/movies/${movie.pk}`">
+                            <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block vue_script %}
+<script>
+    const app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                all: false,
+                era: '',
+                movies: JSON.parse(`{{ movies|safe }}`),
+                genres: JSON.parse(`{{ genres|safe }}`),
+            }
+        },
+        methods: {
+            showAll() {
+                this.all = true;
+            }
+        },
+        computed: {
+            getMoviesByYear() {
+                return (year) => {
+                    return this.movies.filter(movie => {
+                        const pattern = new RegExp('^' + year)
+                        return pattern.test(movie.fields.release_date)
+                    })
+                }
+            },
+            get1980Movies() {
+                return this.movies.filter((movie, idx) => idx === 0)
+            },
+            get1990Movies() {
+                return this.movies.filter((movie, idx) => idx === 143)
+            },
+            get2000Movies() {
+                return this.movies.filter((movie, idx) => idx === 210)
+            },
+            get2010Movies() {
+                return this.movies.filter((movie, idx) => idx === 380)
+            },
+        }
+    })
+</script>
+{% endblock %}

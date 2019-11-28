@@ -1,10 +1,5 @@
 <form action="{% url 'movies:create_review' movie.id %}" method="POST">
     {% csrf_token %}
-    <font>
-        한줄평: <input type="text" name="input_content" style="width:600px" placeholder=" 🔎 입력해주세요">
-    </font>
-    <br>
-    <br>
     <font class="mr-3 mt-3">평점:</font>
     <span class="star-input">
         <span class="input" name="input_rate">
@@ -20,7 +15,16 @@
             <input class="js-star" type="radio" name="input_rate" id="p10" value="10"><label for="p10">10</label>
         </span>
     </span>
-    <input type="submit" style="display:inline">
+    <br>
+    <br>
+    <font>
+        한줄평: <input type="text" name="input_content" style="width:600px" placeholder=" 📃 리뷰를 입력해주세요.">
+    </font>
+    <a href="{% url 'movies:create_review' movie.id %}" class="ml-3">
+        <span style="font-size:18px; color: #f38303;">
+            <i class="fas fa-pen"></i>
+        </span>
+    </a>
 </form>
 <br>
 <hr>
@@ -29,17 +33,18 @@
     {% for review in reviews %}
     <li>
         <font>{{ review.user.username }} {{ review.rate }}점
-        {% if user.id == review.user.id %}
-        <form method="POST" action="{% url 'movies:delete_review' movie.id review.id %}" style="display: inline-block">
-            {% csrf_token %}
-            <a href="{% url 'movies:delete_review' movie.id review.id %}">
-                <span style="color: black;">
-                    <i class="fas fa-trash-alt"></i>
-                </span>
-            </a>
-        </form>
-        {% endif %}
-        <br>
+            {% if user.id == review.user.id %}
+            <form method="POST" action="{% url 'movies:delete_review' movie.id review.id %}"
+                style="display: inline-block">
+                {% csrf_token %}
+                <a href="{% url 'movies:delete_review' movie.id review.id %}">
+                    <span style="color: black;">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                </a>
+            </form>
+            {% endif %}
+            <br>
             한줄평: {{ review.content }}</font>
     </li>
     {% endfor %}

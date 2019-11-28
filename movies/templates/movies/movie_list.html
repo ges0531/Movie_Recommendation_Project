@@ -9,7 +9,7 @@
 <div id="app">
     <br>
     <div class="center">
-        <input type="text" v-model="era" @keydown.enter="showAll" class="b" placeholder=" 🔎 입력해주세요">
+        <input type="text" v-model="era" @keydown.enter="showAll" class="b" placeholder=" 🔎 가고싶은 연도(1980~2019)를 입력해 주세요.    ex) 1987">
         <button  @click="showAll" class="button"><span>시간이동</span></button>
     </div>
     <div v-if="!all">
@@ -19,7 +19,7 @@
                     <div class="card">
                         <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center"><font>1980년대</font></h2>
+                            <font><h2 class="card-title text-center">1980년대</h2></font>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center"><font>1990년대</font></h2>
+                            <font><h2 class="card-title text-center">1990년대</h2></font>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center"><font>2000년대</font></h2>
+                            <font><h2 class="card-title text-center">2000년대</h2></font>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="card">
                         <img :src="[[ movie.fields.poster_url ]]" alt="movie_poster" style='width: 250px'>
                         <div class="card-body">
-                            <h2 class="card-title text-center"><font>2010년대</font></h2>
+                            <font><h2 class="card-title text-center">2010년대</h2></font>
                         </div>
                     </div>
                 </div>
