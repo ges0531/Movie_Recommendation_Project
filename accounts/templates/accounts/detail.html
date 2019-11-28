@@ -10,14 +10,13 @@
     <div class="rela-block profile-name-container">
         <div class="rela-block user-name" id="user_name">{{user.username}}</div>
         <a href="{% url 'accounts:follow' user.id %}" class="btn btn-light mx-3">
-            {% if user != user %}
-            {% if user_info in user.stars.all %}
-            <button class="button">following</button>
-            {% else %}
-            <button class="button">follow</button>
-            {% endif %}
-            {% else %}
-            <h1>모야</h1>
+            {% if request.user != user %}
+                {% if user in request.user.stars.all %}
+                    <button class="button">following</button>
+                {% else %}
+                    <button class="button">follow</button>
+                {% endif %}
+
             {% endif %}
         </a>
         <div class="rela-block user-desc" id="user_description">{{user.email}}</div>
@@ -40,7 +39,3 @@
 </div>
 </div>
 {% endblock %}
-
-</body>
-
-</html>

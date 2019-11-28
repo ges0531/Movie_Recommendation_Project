@@ -1,11 +1,22 @@
-node_modules/
+# Virtual ENV
 venv/
+# DB
+*.sqlite3
+# Text backup file
+*.bak
+# 환경 설정 파일$ pip install python-decouple
+.env
+
+node_modules/
 .vscode/
 .idea/
+<<<<<<< HEAD
+=======
 *.sqlite3
 *.bak
 # 환경 설정 파일 $ pip install python-decouple
 .env
+>>>>>>> 9fbb1837aff20bfb16d90cb671ceb4f3e565926f
 
 # Created by https://www.gitignore.io/api/python,django
 # Edit at https://www.gitignore.io/?templates=python,django

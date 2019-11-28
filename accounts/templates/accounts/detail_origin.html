@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-
-{% block title %}User_detail{% endblock title %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'movies/css/button.css' %}">
+{% endblock head %}
 {% block body %}
 <div class='row my-5 mx-auto'>
     <div class="col-5">
@@ -51,4 +52,4 @@
         </button>
     </a>
 
-{% endblock body %}
+{% endblock %}

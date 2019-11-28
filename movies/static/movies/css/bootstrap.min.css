@@ -11141,5 +11141,14 @@ a.text-dark:hover {
         border-color: #dee2e6
     }
 }
-
+.profile-box img{
+	height: 180px;
+}
+.profile-box button{
+	font-size: 12px;
+}
+.profile-box p{
+	font-size: 13px;
+	line-height: 1;
+}
 /*# sourceMappingURL=bootstrap.min.css.map */
