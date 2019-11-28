@@ -1,16 +1,21 @@
-{% extends 'base.html' %}
-
-{% block title %}User_list{% endblock title %}
+{% extends 'accounts/base.html' %}
 
 {% block body %}
-<h1>유저 목록</h1>
+<div style="text-align: center">
+<h1>User List</h1>
 <br>
+
 {% for user in users %}
+<div style="text-align: center">
     <a href="{% url 'accounts:user_detail' user.id %}">
+    
         <li>
             {{ user }}
         </li>
     </a>
+    </div>
 {% endfor %}
+
+</div>
 
 {% endblock body %}

@@ -60,10 +60,10 @@ def user_list(request):
 
 @login_required
 def user_detail(request, user_id):
-    user_info = get_object_or_404(User, id=user_id)
-    reviews = Review.objects.filter(user=user_info)
+    user = get_object_or_404(User, id=user_id)
+    reviews = Review.objects.filter(user=user)
     return render(request, 'accounts/detail.html', {
-        'user_info': user_info,
+        'user': user,
         'reviews': reviews,
     })
 
